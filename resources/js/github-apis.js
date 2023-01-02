@@ -7,9 +7,7 @@ export async function getUserDetails(username) {
         username: username
     }).then(response => {
         return Promise.resolve(response.data);
-    }).catch(err => {
-        return Promise.reject(err);
-    });
+    })
 }
 
 export async function getUserFavoriteLanguage(username) {
@@ -21,11 +19,9 @@ export async function getUserFavoriteLanguage(username) {
                 return Date.parse(b['pushed_at']).valueOf() - Date.parse(a['pushed_at']).valueOf()
             }).slice(0, 5));
         })
-        .catch(Promise.reject)
         .then(repositories => {
             return Promise.all(repositories.map(repo => octokit.request(`GET ${repo['languages_url']}`).then(value => value.data)))
         })
-        .catch(Promise.reject)
         .then(languages => {
             let maxKey, maxValue = 0;
             languages.forEach(lang => {
