@@ -6,13 +6,54 @@
     </title>
 </head>
 <body>
-<div id="notification" style="display: none"></div>
-<form name="user-input">
-    <label for="username">Github username: </label>
-    <input type="text" id="username" name="github_username">
+<div id="toast"></div>
 
-    <input type="submit">
-</form>
-<div id="user-details"></div>
+<main>
+    <section class="search">
+        <form name="user-input">
+            <div>
+                <label for="username">Github Username</label>
+                <input type="text" id="username" name="github_username" tabindex="0" />
+            </div>
+
+            <input id="submit-input" type="submit" tabindex="1"/>
+        </form>
+    </section>
+
+    <section class="user-info">
+        <div class="user-card">
+            <div class="user-profile">
+                <img id="img" width="200px" height="200px" src="resources/img/user-profile.png" alt="User image"/>
+                <div id="bio">User Bio :)</div>
+            </div>
+            <div class="user-details">
+                <div>
+                    <strong>Name:</strong>
+                    <span id="name"></span>
+                </div>
+                <div>
+                    <strong>Email:</strong>
+                    <span id="email"></span>
+                </div>
+                <div>
+                    <strong>Company:</strong>
+                    <span id="company"></span>
+                </div>
+                <div>
+                    <strong>Blog:</strong>
+                    <span id="blog"><a href="#"></a></span>
+                </div>
+                <div>
+                    <strong>Location:</strong>
+                    <span id="location"></span>
+                </div>
+                <div>
+                    <strong>Favorite language:</strong>
+                    <span id="fav_lang"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 </body>
 </html>
