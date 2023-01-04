@@ -1,47 +1,39 @@
 import {getUserDetails, getUserFavoriteLanguage} from "./github-apis.js";
 
-const requiredFields = ['avatar_url', 'name', 'company', 'blog', 'location', 'email', 'bio']
+const REQUIRED_FIELDS = ['avatar_url', 'name', 'company', 'blog', 'location', 'email', 'bio']
 
-document.forms['user-input'].addEventListener('submit', fetchUserData)
+document.forms['user-input'].addEventListener('submit', fetchUserData);
+document.getElementById('toast-close').addEventListener('click', hideNotification);
 
 function fetchUserData(e) {
     e.preventDefault();
-    clearNotification();
+    hideNotification();
     const username = new FormData(e.target).get('github_username').toString();
-    if (localStorage[username]) {
-        updateUserDetailField(localStorage[username]);
-    } else {
-        updateNotification('loading...');
-        getCompleteUserInfo(username)
-            .then(userInfo => {
-                clearNotification();
-                return userInfo;
-            })
-            .then(JSON.stringify)
-            .then(userInfo => {
-                updateUserDetailField(userInfo);
-                return userInfo;
-            })
-            .then(userInfo => {
-                localStorage.setItem(username, userInfo);
-                return userInfo;
-            })
-            .catch(err => {
-                if (err.toString() === 'HttpError: Not Found') {
-                    console.log('not found at all!');
-                    updateUserDetailField('username not found!');
-                } else {
-                    updateNotification(err);
-                    updateUserDetailField('error occured!');
-                }
-                return err;
-            });
-    }
+
+    loadingMode();
+    getCompleteUserInfo(username)
+        .then(userInfo => {
+            updateUserDetailField(userInfo);
+            return userInfo;
+        })
+        .then(userInfo => localStorage.setItem(username, JSON.stringify(userInfo)))
+        .then(() => showNotification('SUCCESS', 'Userinfo fetched successfully.'))
+        .catch(err => {
+            console.error(err);
+            if (err.toString() === 'HttpError: Not Found')
+                showNotification("ERROR", `There is no such user with username ${username}`);
+            else
+                showNotification("ERROR", err.toString());
+        })
+        .then(endLoadingMode);
 }
 
-function getCompleteUserInfo(username) {
+async function getCompleteUserInfo(username) {
+    if (localStorage[username])
+        return Promise.resolve(JSON.parse(localStorage[username]));
+
     return getUserDetails(username)
-        .then(response => JSON.stringify(response, requiredFields))
+        .then(response => JSON.stringify(response, REQUIRED_FIELDS))
         .then(details => {
             return getUserFavoriteLanguage(username)
                 .then(response => {
@@ -49,20 +41,66 @@ function getCompleteUserInfo(username) {
                     user_info['fav_lang'] = response;
                     return user_info;
                 })
-                .catch(err => new Error(err))
+                .catch(err => Promise.reject(err))
         })
 }
 
-function updateUserDetailField(details) {
-    document.getElementById('user-details').innerHTML = details;
+function updateUserDetailField(userInfo) {
+    console.log(userInfo)
+    Object.entries(userInfo).forEach(([key, value]) => {
+        if (value !== null && value) {
+            if (key === 'avatar_url') {
+                document.getElementById('img').src = value;
+            } else {
+                const element = document.getElementById(key);
+                if (key === 'blog') {
+                    element.firstElementChild.href = value;
+                    element.firstElementChild.innerHTML = value;
+                } else {
+                    element.innerHTML = value;
+                }
+
+                if (key !== 'bio') {
+                    element.parentElement.style.display = 'block';
+                }
+            }
+        }
+    })
 }
 
-function updateNotification(msg) {
-    const notification = document.getElementById('notification');
-    notification.innerHTML = msg;
-    notification.style.display = 'block';
+function showNotification(type, msg, time = 5000) {
+    let toastElement = document.getElementById('toast');
+    let success = document.getElementById('success-toast');
+    let error = document.getElementById('error-toast');
+    let toastType = document.getElementById('toast-type');
+    if (type === 'SUCCESS') {
+        toastType.innerHTML = "Success";
+        toastElement.classList.add("toast-green");
+        toastElement.classList.remove("toast-red");
+        success.classList.remove('display-none');
+        error.classList.add('display-none');
+    } else {
+        toastType.innerHTML = "Error";
+        toastElement.classList.remove("toast-green");
+        toastElement.classList.add("toast-red");
+        success.classList.add('display-none');
+        error.classList.remove('display-none');
+    }
+    toastElement.classList.remove('display-none');
+    document.getElementById('toast-msg').innerHTML = msg;
+    setTimeout(() => toastElement.classList.add('display-none'), time)
 }
 
-function clearNotification() {
-    document.getElementById('notification').style.display = 'none';
+function hideNotification() {
+    document.getElementById('toast').classList.add('display-none');
+}
+
+function loadingMode() {
+    document.getElementById('submit-input').disabled = true;
+    document.getElementById('submit-input').style.cursor = 'wait';
+}
+
+function endLoadingMode() {
+    document.getElementById('submit-input').disabled = false;
+    document.getElementById('submit-input').style.cursor = 'pointer';
 }
