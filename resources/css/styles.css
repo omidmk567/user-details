@@ -1,5 +1,7 @@
+/* Import font to use Open Sans font */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+/*Define variables to use */
 :root {
     --primary-bg-color: url('../img/dark-bg.png');
     /*--primary-bg-color: url('../img/light-bg.png');*/
@@ -8,58 +10,21 @@
     --color: #06c;
 }
 
+/*Set the background image and font to body*/
 body {
     background: #fff var(--primary-bg-color) no-repeat center bottom fixed;
     background-size: 100% 100%;
     font-family: "Open Sans", sans-serif;
 }
 
-.main {
-    width: 100%;
-    height: 100%;
-}
-
-.search {
-    width: 400px;
-    height: 400px;
-}
-
-.user-info {
-    width: 700px;
-    height: auto;
-}
-
-.user-card {
-    width: 100%;
-}
-
-.user-profile {
-    padding: 8px 16px;
-    width: 400px;
-}
-
-.user-image {
-    border-radius: 50%;
-}
-
-.user-bio {
-    white-space: pre-line;
-    text-align: center;
-    width: 200px;
-}
-
-.user-details {
-    width: 100%;
-    height: 100%;
-    padding: 0 8px;
-}
-
+/*Add row to split data vertically*/
 .row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
+/*Add row to split data horizontally*/
 .column {
     display: flex;
     flex-direction: column;
@@ -74,19 +39,23 @@ body {
     align-items: start;
 }
 
+/*make it rounded with radius of 8px*/
 .rounded {
     border-radius: 8px;
 }
 
+/*Set secondary background color*/
 .secondary-bg-color {
     background-color: var(--secondary-bg-color);
 }
 
+/*Color the top border*/
 .border-top-colored {
     border-top: 4px solid;
     border-color: var(--color);
 }
 
+/*Set header to be centered and font of 14*/
 .header {
     text-align: center;
     font-size: 14px;
@@ -94,16 +63,19 @@ body {
     align-self: center;
 }
 
+/*Add 16px margin*/
 .m-16 {
     margin: 16px;
 }
 
+/*Set form inputs horizontally with 70% width*/
 .form-group-input {
     display: flex;
     flex-direction: column;
     width: 70%;
 }
 
+/*Label of input should be in separate row*/
 .input-label {
     display: inline-block;
     max-width: 100%;
@@ -111,8 +83,8 @@ body {
     font-size: 14px;
 }
 
+/*Text inputs should have custom border color and text cursor*/
 .text-input {
-    display: flex;
     height: 30px;
     border: 1px solid #f0f0f0;
     border-bottom-color: #8a8d90;
@@ -120,50 +92,51 @@ body {
     width: 100%;
 }
 
+/*Custom bottom border for text input on hover*/
 .text-input:hover {
     border-bottom-color: var(--color);
 }
 
+/*Custom bottom border for text input on focus*/
 .text-input:focus {
     border-bottom-color: var(--color);
 }
 
+/*Submit input should have custom bg color and pointer cursor and be rounded*/
 .submit-input {
     height: 30px;
     color: white;
     background-color: var(--color);
     cursor: pointer;
     border: 0 none;
-    border-radius: 5px;
 }
 
+/*different input color on hovering submit button*/
+.submit-input:hover {
+    background-color: #004080;
+}
+
+/*Submit input button should have different color when is disabled and not-allowed cursor*/
 .submit-input:disabled {
     color: #6a6e73;
     background-color: #d2d2d2;
     cursor: not-allowed;
 }
 
+/*Submit input button should have different color when hovering it and not-allowed cursor*/
 .submit-input:disabled:hover {
     color: #6a6e73;
     background-color: #d2d2d2;
     cursor: not-allowed;
 }
 
-.submit-input:hover {
-    background-color: #004080;
-}
-
-.submit-input:hover {
-    background-color: #004080;
-}
-
+/*toast should be on top and be top of other elements on z axis*/
 .toast {
     position: absolute;
     min-width: 450px;
     z-index: 1;
     padding: 16px 0;
     background-color: #fff;
-    border-radius: 8px;
 }
 
 .toast:before {
@@ -180,6 +153,7 @@ body {
     fill: #fff;
 }
 
+/*toast icon should be in circle and defined metrics and should move little down by translateY*/
 .toast-icon {
     position: absolute;
     top: 50%;
@@ -191,6 +165,7 @@ body {
     border-radius: 50%;
 }
 
+/*Toast type should be bold*/
 .toast-type {
     color: #3e3e3e;
     font-weight: 700;
@@ -210,6 +185,7 @@ body {
     padding-right: 60px;
 }
 
+/*This should be on have same top with other parts of toast*/
 .toast-close {
     position: absolute;
     right: 22px;
@@ -237,10 +213,60 @@ body {
     background-color: #D81A1A;
 }
 
+/*Use to hide element*/
 .display-none {
     display: none;
 }
 
+/*Specific attributes of main*/
+.main {
+    width: 100%;
+    height: 100%;
+}
+
+/*Specific attributes of search*/
+.search {
+    width: 400px;
+    height: 400px;
+}
+
+/*Specific attributes of user-info*/
+.user-info {
+    width: 700px;
+    height: auto;
+}
+
+/*Specific attributes of user-card*/
+.user-card {
+    width: 100%;
+}
+
+/*Specific attributes of user-profile*/
+.user-profile {
+    padding: 8px 16px;
+    width: 400px;
+}
+
+/*Specific attributes of user-image (Should be circle)*/
+.user-image {
+    border-radius: 50%;
+}
+
+/*Specific attributes of user-bio (must show new lines)*/
+.user-bio {
+    white-space: pre-line;
+    text-align: center;
+    width: 200px;
+}
+
+/*Specific attributes of user-details*/
+.user-details {
+    width: 100%;
+    height: 100%;
+    padding: 0 8px;
+}
+
+/*Used to be responsive (two main sections should be in column format and some sizes change)*/
 @media (max-width: 1068px) {
     .main {
         flex-direction: column;
