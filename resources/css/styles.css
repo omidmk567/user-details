@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 :root {
     --primary-bg-color: url('../img/dark-bg.png');
     /*--primary-bg-color: url('../img/light-bg.png');*/
@@ -9,6 +11,7 @@
 body {
     background: #fff var(--primary-bg-color) no-repeat center bottom fixed;
     background-size: 100% 100%;
+    font-family: "Open Sans", sans-serif;
 }
 
 .main {
