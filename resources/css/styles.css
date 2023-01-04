@@ -157,6 +157,86 @@ body {
     background-color: #004080;
 }
 
+.toast {
+    position: absolute;
+    min-width: 450px;
+    z-index: 1;
+    padding: 16px 0;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.toast:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.toast-svg {
+    fill: #fff;
+}
+
+.toast-icon {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.toast-type {
+    color: #3e3e3e;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.toast-message {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #878787;
+}
+
+.toast-content {
+    padding-left: 70px;
+    padding-right: 60px;
+}
+
+.toast-close {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 14px;
+    cursor: pointer;
+    height: 14px;
+    fill: #878787;
+    transform: translateY(-50%);
+}
+
+.toast-green .toast-icon {
+    background-color: #2BDE3F;
+}
+
+.toast-green:before {
+    background-color: #2BDE3F;
+}
+
+.toast-red .toast-icon {
+    background-color: #D81A1A;
+}
+
+.toast-red:before {
+    background-color: #D81A1A;
+}
+
 .display-none {
     display: none;
 }
