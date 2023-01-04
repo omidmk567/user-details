@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
     <script type="module" src="resources/js/scripts.js"></script>
+    <link rel="stylesheet" href="resources/css/styles.css">
     <title>
         User details
     </title>
@@ -8,46 +9,52 @@
 <body>
 <div id="toast"></div>
 
-<main>
-    <section class="search">
-        <form name="user-input">
-            <div>
-                <label for="username">Github Username</label>
-                <input type="text" id="username" name="github_username" tabindex="0" />
+<main class="row align-center main">
+    <section class="rounded border-top-colored column align-center secondary-bg-color search">
+        <header class="header">
+            <h1>Find GitHub account information</h1>
+        </header>
+        <form name="user-input" class="form-group-input">
+            <div class="m-16">
+                <label for="username" class="input-label">Github Username</label>
+                <input type="text" class="text-input" id="username" name="github_username" tabindex="0" />
             </div>
 
-            <input id="submit-input" type="submit" tabindex="1"/>
+            <input id="submit-input" type="submit" class="m-16 submit-input" tabindex="1"/>
         </form>
     </section>
 
-    <section class="user-info">
-        <div class="user-card">
-            <div class="user-profile">
-                <img id="img" width="200px" height="200px" src="resources/img/user-profile.png" alt="User image"/>
-                <div id="bio">User Bio :)</div>
+    <section class="rounded border-top-colored column align-start secondary-bg-color m-16 user-info">
+        <header class="header">
+            <h1>User info</h1>
+        </header>
+        <div class="row align-start user-card">
+            <div class="column align-center m-16 user-profile">
+                <img id="img" class="m-16 user-image" width="200px" height="200px" src="resources/img/user-profile.png" alt="User image"/>
+                <div id="bio" class="user-bio">User bio goes here :)</div>
             </div>
-            <div class="user-details">
-                <div>
+            <div class="column align-start m-16 user-details">
+                <div class="m-16 display-none">
                     <strong>Name:</strong>
                     <span id="name"></span>
                 </div>
-                <div>
+                <div class="m-16 display-none">
                     <strong>Email:</strong>
                     <span id="email"></span>
                 </div>
-                <div>
+                <div class="m-16 display-none">
                     <strong>Company:</strong>
                     <span id="company"></span>
                 </div>
-                <div>
+                <div class="m-16 display-none">
                     <strong>Blog:</strong>
                     <span id="blog"><a href="#"></a></span>
                 </div>
-                <div>
+                <div class="m-16 display-none">
                     <strong>Location:</strong>
                     <span id="location"></span>
                 </div>
-                <div>
+                <div class="m-16 display-none">
                     <strong>Favorite language:</strong>
                     <span id="fav_lang"></span>
                 </div>
