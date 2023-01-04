@@ -160,3 +160,38 @@ body {
 .display-none {
     display: none;
 }
+
+@media (max-width: 1068px) {
+    .main {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .search {
+        margin: 24px;
+    }
+
+    .user-info {
+        width: unset;
+        height: unset;
+        max-width: max-content;
+        max-height: max-content;
+        margin: 24px 12px;
+    }
+
+    .user-card {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        height: auto;
+        align-items: center;
+    }
+
+    .user-profile {
+        display: flex;
+    }
+
+    .user-details {
+        align-items: center;
+    }
+}
