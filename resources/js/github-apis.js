@@ -11,6 +11,9 @@ const octokit = new Octokit({
 
 // Get user details from GitHub
 export async function getUserDetails(username) {
+    if (!username)
+        return Promise.reject("Username can't be empty");
+
     return await octokit.request('GET /users/{username}', {
         username: username
     }).then(response => {
