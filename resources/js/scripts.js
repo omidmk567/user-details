@@ -1,7 +1,7 @@
 import {getUserDetails, getUserFavoriteLanguage} from "./github-apis.js";
 
 // Specify required fields of user to be shown in page
-const REQUIRED_FIELDS = ['avatar_url', 'name', 'company', 'blog', 'location', 'email', 'bio']
+const REQUIRED_FIELDS = ['avatar_url', 'name', 'company', 'blog', 'location', 'email', 'bio', 'fav_lang']
 
 // Call fetchUserData(event) on submit form
 document.forms['user-input'].addEventListener('submit', fetchUserData);
@@ -20,6 +20,7 @@ function fetchUserData(e) {
     // Call GitHub apis or use local storage to get user info
     getCompleteUserInfo(username)
         .then(userInfo => {
+            hideUserDetails();
             updateUserDetailField(userInfo);
             return userInfo;
         })
@@ -72,7 +73,7 @@ function updateUserDetailField(userInfo) {
             if (key === 'avatar_url') {
                 document.getElementById('img').src = value;
             } else {
-                const element = document.getElementById(key);
+                let element = document.getElementById(key);
                 if (key === 'blog') {
                     element.firstElementChild.href = value;
                     element.firstElementChild.innerHTML = value;
@@ -80,9 +81,11 @@ function updateUserDetailField(userInfo) {
                     element.innerHTML = value;
                 }
 
+                // Except bio, for all other elements, their parents property should be hidden
                 if (key !== 'bio') {
-                    element.parentElement.style.display = 'block';
+                    element = element.parentElement;
                 }
+                element.classList.remove('display-none');
             }
         }
     })
@@ -116,6 +119,17 @@ function showNotification(type, msg, time = 5000) {
     document.getElementById('toast-msg').innerHTML = msg;
     // Remove toast after few seconds
     setTimeout(() => toastElement.classList.add('display-none'), time)
+}
+
+function hideUserDetails() {
+    REQUIRED_FIELDS.forEach(field => {
+        let element = document.getElementById(field);
+        if (field !== 'bio') {
+            // Here we use ?. because fav_lang property has no corresponding html element
+            element = element?.parentElement;
+        }
+        element?.classList.add('display-none');
+    });
 }
 
 function hideNotification() {
