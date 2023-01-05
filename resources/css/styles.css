@@ -4,10 +4,23 @@
 /*Define variables to use */
 :root {
     --primary-bg-color: url('../img/dark-bg.png');
-    /*--primary-bg-color: url('../img/light-bg.png');*/
     --secondary-bg-color: white;
-    /*--secondary-bg-color: #eaeaea;*/
-    --color: #06c;
+    --border-color: #f0f0f0;
+    --primary-color: #06c;
+}
+
+/*Attributes of light theme*/
+[theme='light'] {
+    --primary-bg-color: url('../img/light-bg.png');
+    --secondary-bg-color: #eaeaea;
+    --border-color: rgb(218, 218, 218);
+}
+
+/*Attributes of dark theme*/
+[theme='dark'] {
+    --primary-bg-color: url('../img/dark-bg.png');
+    --secondary-bg-color: white;
+    --border-color: #f0f0f0;
 }
 
 /*Set the background image and font to body*/
@@ -52,7 +65,7 @@ body {
 /*Color the top border*/
 .border-top-colored {
     border-top: 4px solid;
-    border-color: var(--color);
+    border-color: var(--primary-color);
 }
 
 /*Set header to be centered and font of 14*/
@@ -86,27 +99,23 @@ body {
 /*Text inputs should have custom border color and text cursor*/
 .text-input {
     height: 30px;
-    border: 1px solid #f0f0f0;
+    background-color: var(--secondary-bg-color);
+    border: 1px solid var(--border-color);
     border-bottom-color: #8a8d90;
     cursor: text;
     width: 100%;
 }
 
-/*Custom bottom border for text input on hover*/
-.text-input:hover {
-    border-bottom-color: var(--color);
-}
-
-/*Custom bottom border for text input on focus*/
-.text-input:focus {
-    border-bottom-color: var(--color);
+/*Custom bottom border for text input on hover and focus*/
+.text-input:hover,:focus {
+    border-bottom-color: var(--primary-color);
 }
 
 /*Submit input should have custom bg color and pointer cursor and be rounded*/
 .submit-input {
     height: 30px;
     color: white;
-    background-color: var(--color);
+    background-color: var(--primary-color);
     cursor: pointer;
     border: 0 none;
 }
@@ -136,7 +145,7 @@ body {
     min-width: 450px;
     z-index: 1;
     padding: 16px 0;
-    background-color: #fff;
+    background-color: var(--secondary-bg-color);
 }
 
 .toast:before {
@@ -216,6 +225,13 @@ body {
 /*Use to hide element*/
 .display-none {
     display: none;
+}
+
+/*Specific attributes of button (Should be on right)*/
+.btn {
+    position: absolute;
+    right: 24px;
+    min-height: 5%;
 }
 
 /*Specific attributes of main*/

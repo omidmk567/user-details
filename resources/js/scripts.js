@@ -9,6 +9,8 @@ document.forms['user-input'].addEventListener('submit', fetchUserData);
 // Call hideNotification() on toast close button
 document.getElementById('toast-close').addEventListener('click', hideNotification);
 
+document.getElementById('theme-selector').addEventListener('click', switchTheme);
+
 function fetchUserData(e) {
     e.preventDefault();
     hideNotification();
@@ -130,6 +132,18 @@ function hideUserDetails() {
         }
         element?.classList.add('display-none');
     });
+}
+
+// Switch the html attribute to dark or light
+function switchTheme() {
+    const themeElement = document.getElementById('theme-selector').firstElementChild;
+    if (document.documentElement.getAttribute('theme') === 'light') {
+        document.documentElement.setAttribute('theme', 'dark');
+        themeElement.innerHTML = "Switch to light mode";
+    } else {
+        document.documentElement.setAttribute('theme', 'light');
+        themeElement.innerHTML = "Switch to dark mode";
+    }
 }
 
 function hideNotification() {
